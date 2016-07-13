@@ -1,75 +1,62 @@
+set number
+set wildmenu
 set nocompatible
 filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-Plugin 'scrooloose/syntastic'
-Plugin 'tmhedberg/SimpylFold'
-Plugin 'vim-scripts/indentpython.vim'
-Plugin 'nvie/vim-flake8'
-Plugin 'scrooloose/nerdtree'
-Plugin 'jnurmine/Zenburn'
-
-
-
-
-
-
-
-
-
-
-
-call vundle#end()
-filetype plugin indent on
+syntax on
+set cursorline
+set mouse=a
+set showcmd
+set tabstop=4 shiftwidth=4 expandtab
+set splitbelow
+set splitright
+set foldmethod =indent
+set foldlevel =99
 
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
-set nu
-set foldmethod=indent
-set foldlevel=99
-
 nnoremap <space> za
 
-au BufNewFile,BufRead *.py
-  \set tabstop=4
-  \set softtabstop=4
-  \set shiftwidth=4
-  \set textwidth=79
-  \set expandtab
-  \set autoindent
-  \set fileformat=unix
-highlight BadWhitespace ctermbg=red guibg=darkred
-au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+let mapleader=","
+nnoremap <leader>t :YcmCompleter GetType<CR>
+nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nnoremap <leader>f :YcmCompleter FixIt<CR>
 
-set encoding=utf-8
-let python_highlight_all=1
-syntax on
-set clipboard=unnamed
-autocmd vimenter * NERDTree
-colors zenburn
+set rtp+=~/.vim/bundle/Vundle.vim
+
+call vundle#begin()
+
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'tomtom/tlib_vim'
+Plugin 'morhetz/gruvbox'
+Plugin 'scrooloose/nerdtree'
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'garbas/vim-snipmate'
+Plugin 'bling/vim-airline'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'klen/python-mode'
+Plugin 'tmhedberg/SimpylFold'
+
+call vundle#end()   
+
+filetype plugin indent on
+colo gruvbox
 set background=dark
+set laststatus=2
 
+let g:ycm_global_ycm_extra_conf = '/home/ben/.ycm_extra_conf.py'
+let g:ycm_key_list_select_completion=[]
+let g:ycm_key_list_previous_completion=[]
+let g:pymode_rope_complete_on_dot = 0
+let g:pymode_warnings = 1
 
+" pymode config file
+let g:pymode_lint_config = '/home/ben/.vim/pylint.rc'
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+" If you prefer the Omni-Completion tip window to close when a selection is
+" made, these lines close it on movement in insert mode or when leaving
+" insert mode
+autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
+autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 
